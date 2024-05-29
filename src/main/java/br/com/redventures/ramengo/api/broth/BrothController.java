@@ -16,7 +16,7 @@ public class BrothController extends BaseController {
     @Autowired
     private BrothApplicationService brothApplicationService;
     @GetMapping()
-    public List<Broth> open (@RequestHeader String tokenAuthentication) throws OrderRequestForm.ValidationException {
+    public List<Broth> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
         BaseController baseController = new BaseController();

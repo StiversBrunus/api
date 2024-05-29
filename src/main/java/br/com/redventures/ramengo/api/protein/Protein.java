@@ -23,10 +23,6 @@ public class Protein {
         this.price = price;
     }
 
-    /*************
-     * METHODS
-     **********/
-
     /*******************
      * GETS AND SETS
      ****************/

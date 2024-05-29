@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderRequestController extends BaseController {
 
     @GetMapping
-    public String open (@RequestHeader String tokenAuthentication) throws OrderRequestForm.ValidationException {
+    public String open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
         BaseController baseController = new BaseController();

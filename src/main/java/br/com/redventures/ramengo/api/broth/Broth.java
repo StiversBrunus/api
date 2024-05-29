@@ -23,10 +23,6 @@ public class Broth {
             this.price = price;
         }
 
-    /*************
-     * METHODS
-     **********/
-
     /*******************
      * GETS AND SETS
      ****************/

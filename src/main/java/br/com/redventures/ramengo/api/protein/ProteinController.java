@@ -17,7 +17,7 @@ public class ProteinController extends BaseController {
     @Autowired
     private ProteinApplicationService proteinApplicationService;
     @GetMapping
-    public List<Protein> open (@RequestHeader String tokenAuthentication) throws OrderRequestForm.ValidationException {
+    public List<Protein> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
         BaseController baseController = new BaseController();
