@@ -1,8 +1,10 @@
 package br.com.redventures.ramengo.api;
 
 import br.com.redventures.ramengo.api.order.request.OrderRequestForm;
+import br.com.redventures.ramengo.api.validation.ErroResponse;
 import br.com.redventures.ramengo.api.validation.ValidationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class BaseController {
@@ -23,10 +25,9 @@ public class BaseController {
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public static class ForbiddenException extends RuntimeException {
-        public ForbiddenException(String message) {
-            super(message);
-        }
+    public ResponseEntity<ErroResponse> forbiddenException (Exception ex)  {
+
+        return new ResponseEntity<>(new ErroResponse(ex.getMessage()), HttpStatus.FORBIDDEN);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
