@@ -17,14 +17,7 @@ public class ProteinDataStore {
                             "https://tech.redventures.com.br/icons/pork/active.svg",
                             "Chasu",
                             "A sliced flavourful pork meat with a selection of season vegetables.",
-                            10),
-
-                    new Protein("2",
-                            "https://tech.redventures.com.br/icons/chicken/inactive.svg",
-                            "https://tech.redventures.com.br/icons/chicken/active.svg",
-                            "Chicken",
-                            "Grilled chicken breast with a hint of soy sauce.",
-                            8)
+                            10)
             );
     };
 
