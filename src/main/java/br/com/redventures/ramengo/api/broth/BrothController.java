@@ -11,23 +11,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/broths")
-public class BrothController extends BaseController {
+public class BrothController {
+
+    private final BaseController baseController;
 
     @Autowired
-    private BrothApplicationService brothApplicationService;
+    public BrothController(BaseController baseController) {
+        this.baseController = baseController;
+    }
     @GetMapping()
     public List<Broth> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
-        BaseController baseController = new BaseController();
         baseController.auth(form);
 
-        return this.listBroths();
+        return baseController.brothList();
     }
 
     @GetMapping("/list")
     public List<Broth> listBroths () {
-
-        return brothApplicationService.getAllBroth();
+        return baseController.brothList();
     }
 }

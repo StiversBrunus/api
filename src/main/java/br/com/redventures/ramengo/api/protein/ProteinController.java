@@ -12,23 +12,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/proteins")
-public class ProteinController extends BaseController {
+public class ProteinController {
+
+    private final BaseController baseController;
 
     @Autowired
-    private ProteinApplicationService proteinApplicationService;
+    public ProteinController(BaseController baseController) {
+        this.baseController = baseController;
+    }
     @GetMapping
     public List<Protein> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
-        BaseController baseController = new BaseController();
         baseController.auth(form);
 
-        return this.getProteins();
+        return baseController.proteinList();
     }
 
     @GetMapping("/list")
     public List<Protein> getProteins () {
-
-        return proteinApplicationService.getAllProtein();
+        return baseController.proteinList();
     }
 }
