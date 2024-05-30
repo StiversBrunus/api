@@ -17,6 +17,7 @@ public class BaseController {
                 throw  new BaseController.BadRequestException(ex.getMessage());
             }
 
+            // if message is unknown, so throw Internal Error Server
             throw new InternalServerErrorException("could not place order");
         }
     }

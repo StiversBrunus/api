@@ -20,7 +20,10 @@ public class ProteinController extends BaseController {
     @GetMapping
     public List<Protein> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws ValidationException {
 
+        // Create a new form and pass the header token as a constructor parameter
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
+
+        // Call BaseController for do request authentication
         BaseController baseController = new BaseController();
         baseController.auth(form);
 

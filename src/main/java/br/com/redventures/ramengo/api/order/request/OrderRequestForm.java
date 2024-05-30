@@ -19,9 +19,12 @@ public class OrderRequestForm {
      * BUILDERS
      ***********/
 
+    // This constructor is being used for auth get method
     public OrderRequestForm (String token){
         this.token = token;
     }
+
+    // This constructor is being used for auth and build order of the post method
     public OrderRequestForm(String token, String brothId, String proteinId) {
         this.token = token;
         this.brothId = brothId;
@@ -38,10 +41,12 @@ public class OrderRequestForm {
             throw new ValidationException("x-api-key header missing");
         }
 
+        // if token isn't equals, return 'invalid token'
         if (!Security.AUTH_TOKEN.equals(this.getToken())){
             throw new ValidationException("x-api-key header invalid");
         }
 
+        // if order request be an order, so validate required fields
         if (this.isOrder() && (StringUtils.isBlank(this.getBrothId()) || StringUtils.isBlank(this.getProteinId()))) {
             throw new ValidationException("both brothId and proteinId are required");
         }
