@@ -1,6 +1,5 @@
 package br.com.redventures.ramengo.api.order.request;
 
-import br.com.redventures.ramengo.api.BaseController;
 import br.com.redventures.ramengo.api.infra.Security;
 import io.micrometer.common.util.StringUtils;
 

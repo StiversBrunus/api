@@ -1,7 +1,5 @@
 package br.com.redventures.ramengo.api.protein;
 
-import br.com.redventures.ramengo.api.broth.Broth;
-
 import java.util.Arrays;
 import java.util.List;
 
