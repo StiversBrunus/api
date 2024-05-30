@@ -1,5 +1,8 @@
 package br.com.redventures.ramengo.api.broth;
 
+import br.com.redventures.ramengo.api.validation.ValidationException;
+import io.micrometer.common.util.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,4 +32,9 @@ public class BrothDataStore {
                 return null;
         }
 
+        public static void validateBroth(String nameBroth) throws ValidationException {
+                if(StringUtils.isBlank(nameBroth)){
+                        throw new ValidationException("Broth not found!");
+                }
+        }
 }

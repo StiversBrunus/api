@@ -14,7 +14,7 @@ public class OrderRequest {
 
     }
 
-    public String buildImage(String externalUrl, String nameProtein){
+    public String buildImageUrl(String externalUrl, String nameProtein){
         String ramen = "ramen";
         String imageType = ".png";
 

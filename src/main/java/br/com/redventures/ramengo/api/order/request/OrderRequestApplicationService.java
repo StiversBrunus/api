@@ -30,32 +30,47 @@ public class OrderRequestApplicationService {
     }
 
     // Build order
-    public OrderRequest buildOrder (String orderNumber, OrderRequestForm orderRequestForm){
+    public OrderRequest buildOrder (String orderNumber, OrderRequestForm orderRequestForm) throws ValidationException {
 
         OrderRequest orderRequest = new OrderRequest();
 
         orderRequest.setId(orderNumber);
         orderRequest.setDescription(this.buildDescription(orderRequest, orderRequestForm));
-        orderRequest.setImage(this.buildImage(Security.RAMEN_EXTERNAL_IMAGE_URL, orderRequest, orderRequestForm));
+        orderRequest.setImage(this.buildImageUrl(Security.RAMEN_EXTERNAL_IMAGE_URL, orderRequest, orderRequestForm));
 
         return orderRequest;
     }
-
+    
     // Build description order
-    public String buildDescription (OrderRequest orderRequest, OrderRequestForm orderRequestForm) {
+    public String buildDescription (OrderRequest orderRequest, OrderRequestForm orderRequestForm) throws ValidationException {
 
+        // Take name by Id
         String nameBroth = BrothDataStore.getNameById(orderRequestForm.getBrothId());
         String nameProtein = ProteinDataStore.getNameById(orderRequestForm.getProteinId());
 
+        // Valid if found the name
+        this.validateName(nameBroth, nameProtein);
+
+        // if found, so build description
         return orderRequest.buildDescription(nameBroth, nameProtein);
     }
 
-    // Build image description
-    public String buildImage (String externalUrl, OrderRequest orderRequest, OrderRequestForm orderRequestForm){
+    // Build image Url
+    public String buildImageUrl(String externalUrl, OrderRequest orderRequest, OrderRequestForm orderRequestForm) throws ValidationException {
 
+        // Take name by Id
+        String nameBroth = BrothDataStore.getNameById(orderRequestForm.getBrothId());
         String nameProtein = ProteinDataStore.getNameById(orderRequestForm.getProteinId());
 
-        return orderRequest.buildImage(externalUrl, nameProtein);
+        // How method is independent, I think validate again
+        // but specific nameProtein for be used to build image
+        this.validateName(nameBroth, nameProtein);
+
+        return orderRequest.buildImageUrl(externalUrl, nameProtein);
+    }
+    public void validateName (String nameBroth, String nameProtein) throws ValidationException {
+            BrothDataStore.validateBroth(nameBroth);
+            ProteinDataStore.validateProtein(nameProtein);
     }
 
     // Get order number

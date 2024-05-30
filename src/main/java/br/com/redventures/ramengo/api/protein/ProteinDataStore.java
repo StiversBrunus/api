@@ -1,6 +1,8 @@
 package br.com.redventures.ramengo.api.protein;
 
 import br.com.redventures.ramengo.api.broth.Broth;
+import br.com.redventures.ramengo.api.validation.ValidationException;
+import io.micrometer.common.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,4 +33,9 @@ public class ProteinDataStore {
         return null;
     }
 
+    public static void validateProtein (String nameProtein) throws ValidationException {
+        if( StringUtils.isBlank(nameProtein)){
+            throw new ValidationException("Protein not found!");
+        }
+    }
 }
