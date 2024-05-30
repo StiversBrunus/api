@@ -1,15 +1,16 @@
 package br.com.redventures.ramengo.api;
 
 import br.com.redventures.ramengo.api.order.request.OrderRequestForm;
+import br.com.redventures.ramengo.api.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class BaseController {
 
-    public void auth (OrderRequestForm form) throws OrderRequestForm.ValidationException {
+    public void auth (OrderRequestForm form) throws ValidationException {
         try {
             form.validate();
-        } catch (OrderRequestForm.ValidationException ex) {
+        } catch (ValidationException ex) {
 
             if (ex.getMessage().contains("x-api-key header")){
                 throw new BaseController.ForbiddenException(ex.getMessage());

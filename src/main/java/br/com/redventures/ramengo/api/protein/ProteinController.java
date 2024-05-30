@@ -2,6 +2,7 @@ package br.com.redventures.ramengo.api.protein;
 
 import br.com.redventures.ramengo.api.BaseController;
 import br.com.redventures.ramengo.api.order.request.OrderRequestForm;
+import br.com.redventures.ramengo.api.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -17,7 +18,7 @@ public class ProteinController extends BaseController {
     @Autowired
     private ProteinApplicationService proteinApplicationService;
     @GetMapping
-    public List<Protein> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
+    public List<Protein> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws ValidationException {
 
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
         BaseController baseController = new BaseController();

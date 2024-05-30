@@ -1,6 +1,7 @@
 package br.com.redventures.ramengo.api.order.request;
 
 import br.com.redventures.ramengo.api.infra.Security;
+import br.com.redventures.ramengo.api.validation.ValidationException;
 import io.micrometer.common.util.StringUtils;
 
 public class OrderRequestForm {
@@ -44,12 +45,6 @@ public class OrderRequestForm {
 
         if (this.isOrder() && (StringUtils.isBlank(this.getBrothId()) || StringUtils.isBlank(this.getProteinId()))) {
             throw new ValidationException("both brothId and proteinId are required");
-        }
-    }
-
-    public static class ValidationException extends Exception {
-        public ValidationException(String message) {
-            super(message);
         }
     }
 
