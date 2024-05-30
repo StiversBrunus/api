@@ -20,8 +20,6 @@ public class OrderRequestApplicationService {
     // Return the order with; orderId, description and image
     public OrderRequest order (OrderRequestForm orderRequestForm) throws IOException, InterruptedException, ValidationException {
 
-        // TO DO: Validation for receive just one order
-
         // Get order number of the external Url
         String orderNumber = this.getOrderNumber(orderRequestForm.getToken());
 
@@ -35,7 +33,11 @@ public class OrderRequestApplicationService {
         OrderRequest orderRequest = new OrderRequest();
 
         orderRequest.setId(orderNumber);
+
+        // Build description using order request and form
         orderRequest.setDescription(this.buildDescription(orderRequest, orderRequestForm));
+
+        // Build image url using; base link external, order request and form
         orderRequest.setImage(this.buildImageUrl(Security.RAMEN_EXTERNAL_IMAGE_URL, orderRequest, orderRequestForm));
 
         return orderRequest;
@@ -51,7 +53,7 @@ public class OrderRequestApplicationService {
         // Valid if found the name
         this.validateName(nameBroth, nameProtein);
 
-        // if found, so build description
+        // if found, so used for build description
         return orderRequest.buildDescription(nameBroth, nameProtein);
     }
 
@@ -63,9 +65,10 @@ public class OrderRequestApplicationService {
         String nameProtein = ProteinDataStore.getNameById(orderRequestForm.getProteinId());
 
         // How method is independent, I think validate again
-        // but specific nameProtein for be used to build image
+        // but specific nameProtein for be used to build image url
         this.validateName(nameBroth, nameProtein);
 
+        // if found, so used for build image url
         return orderRequest.buildImageUrl(externalUrl, nameProtein);
     }
     public void validateName (String nameBroth, String nameProtein) throws ValidationException {
@@ -76,6 +79,7 @@ public class OrderRequestApplicationService {
     // Get order number
     private String getOrderNumber(String token) throws IOException, InterruptedException, ValidationException {
 
+        // Using token, auth on external url
         String orderNumber = authenticateExternalUrl(token);
 
         if (StringUtils.isBlank(orderNumber)){
@@ -90,7 +94,7 @@ public class OrderRequestApplicationService {
 
         String orderNumber;
 
-        // created client
+        // Created client
         HttpClient client = HttpClient.newHttpClient();
 
         // Doing request
@@ -101,7 +105,7 @@ public class OrderRequestApplicationService {
         // Take response
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // Take responseBody
+        // Take response Body
         String responseBody = response.body();
 
         // Convert from responseBody to JsonObject
