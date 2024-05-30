@@ -1,5 +1,7 @@
 package br.com.redventures.ramengo.api.protein;
 
+import br.com.redventures.ramengo.api.broth.Broth;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,5 +20,15 @@ public class ProteinDataStore {
                             10)
             );
     };
+
+    public static String getNameById(String id){
+
+        for (Protein protein : PROTEIN_LIST){
+            if (protein.getId().equals(id)){
+                return protein.getName();
+            }
+        }
+        return null;
+    }
 
 }

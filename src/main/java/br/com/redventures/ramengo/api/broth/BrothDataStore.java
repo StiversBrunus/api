@@ -19,4 +19,14 @@ public class BrothDataStore {
                 );
         }
 
+        public static String getNameById(String id){
+
+                for (Broth broth : BROTH_LIST){
+                        if (broth.getId().equals(id)){
+                                return broth.getName();
+                        }
+                }
+                return null;
+        }
+
 }
