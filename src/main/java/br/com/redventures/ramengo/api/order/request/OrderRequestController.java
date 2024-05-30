@@ -1,19 +1,20 @@
 package br.com.redventures.ramengo.api.order.request;
 
 import br.com.redventures.ramengo.api.BaseController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderRequestController extends BaseController {
 
-    @GetMapping
-    public String open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws OrderRequestForm.ValidationException {
+    @PostMapping
+    public String open (@RequestHeader(name = "x-api-key") String tokenAuthentication,  @RequestBody OrderRequestForm orderRequestForm) throws OrderRequestForm.ValidationException {
 
-        OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
+        // I use the form information
+        // Injection token of the header on form with another information
+        OrderRequestForm form = new OrderRequestForm(tokenAuthentication, orderRequestForm.getBrothId(), orderRequestForm.getProteinId());
+        form.setOrder(true);
+
         BaseController baseController = new BaseController();
         baseController.auth(form);
 

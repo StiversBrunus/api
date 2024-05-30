@@ -10,13 +10,34 @@ public class BaseController {
         try {
             form.validate();
         } catch (OrderRequestForm.ValidationException ex) {
-            throw new BaseController.ForbiddenException(ex.getMessage());
+
+            if (ex.getMessage().contains("x-api-key header")){
+                throw new BaseController.ForbiddenException(ex.getMessage());
+            } else if (ex.getMessage().contains("are required")){
+                throw  new BaseController.BadRequestException(ex.getMessage());
+            }
+
+            throw new InternalServerErrorException("could not place order");
         }
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public static class ForbiddenException extends RuntimeException {
         public ForbiddenException(String message) {
+            super(message);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class BadRequestException extends RuntimeException {
+        public BadRequestException(String message){
+            super(message);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public static class InternalServerErrorException extends RuntimeException {
+        public InternalServerErrorException(String message){
             super(message);
         }
     }
