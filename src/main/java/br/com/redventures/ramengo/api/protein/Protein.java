@@ -9,12 +9,12 @@ public class Protein {
     private String imageActive;
     private String name;
     private String description;
-    private double price;
+    private Integer price;
 
     /***************
      * BUILDERS
      ***********/
-    public Protein(String id, String imageInactive, String imageActive, String name, String description, double price) {
+    public Protein(String id, String imageInactive, String imageActive, String name, String description, Integer price) {
         this.id = id;
         this.imageInactive = imageInactive;
         this.imageActive = imageActive;
@@ -66,11 +66,11 @@ public class Protein {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }
