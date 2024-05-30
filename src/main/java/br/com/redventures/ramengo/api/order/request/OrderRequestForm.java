@@ -9,6 +9,7 @@ public class OrderRequestForm {
     /*************
      * FIELDS
      *********/
+
     String token;
     String brothId;
     String proteinId;
@@ -17,9 +18,6 @@ public class OrderRequestForm {
     /***************
      * BUILDERS
      ***********/
-
-    public OrderRequestForm() {
-    }
 
     public OrderRequestForm (String token){
         this.token = token;
@@ -33,6 +31,7 @@ public class OrderRequestForm {
     /*************
      * METHODS
      **********/
+
     public void validate () throws ValidationException {
 
         if (StringUtils.isBlank(this.getToken())){
@@ -51,6 +50,7 @@ public class OrderRequestForm {
     /*******************
      * GETS AND SETS
      ****************/
+
     public String getToken() {
         return token;
     }

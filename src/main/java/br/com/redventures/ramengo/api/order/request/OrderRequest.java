@@ -1,12 +1,25 @@
 package br.com.redventures.ramengo.api.order.request;
 
 public class OrderRequest {
+
+    /*************
+     * FIELDS
+     *********/
+
     String id;
     String description;
     String image;
 
+    /***************
+     * BUILDERS
+     ***********/
+
     public OrderRequest() {
     }
+
+    /*************
+     * METHODS
+     **********/
 
     public String buildDescription (String nameBroth, String nameProtein) {
 
@@ -21,6 +34,9 @@ public class OrderRequest {
         return String.format("%s %s %s %s", externalUrl, ramen, nameProtein, imageType).replace(" ", "");
     }
 
+    /*******************
+     * GETS AND SETS
+     ****************/
     public String getId() {
         return id;
     }

@@ -1,9 +1,11 @@
 package br.com.redventures.ramengo.api.broth;
 
 public class Broth {
+
         /*************
          * FIELDS
          *********/
+
         private String id;
         private String imageInactive;
         private String imageActive;
@@ -14,6 +16,7 @@ public class Broth {
         /***************
          * BUILDERS
          ***********/
+
         public Broth(String id, String imageInactive, String imageActive, String name, String description, Integer price){
             this.id = id;
             this.imageInactive = imageInactive;
@@ -26,6 +29,7 @@ public class Broth {
     /*******************
      * GETS AND SETS
      ****************/
+
     public String getId() {
         return id;
     }

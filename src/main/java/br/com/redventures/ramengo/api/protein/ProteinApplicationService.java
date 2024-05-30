@@ -6,7 +6,6 @@ import java.util.List;
 
 @Service
 public class ProteinApplicationService {
-
     public List<Protein> getAllProtein (){
 
         return ProteinDataStore.PROTEIN_LIST;

@@ -1,18 +1,20 @@
 package br.com.redventures.ramengo.api.protein;
 
-import br.com.redventures.ramengo.api.broth.Broth;
 import br.com.redventures.ramengo.api.validation.ValidationException;
 import io.micrometer.common.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ProteinDataStore {
 
+    /*************
+     * FIELDS
+     *********/
+
     public static final List<Protein> PROTEIN_LIST;
 
     static {
-            PROTEIN_LIST = Arrays.asList(
+            PROTEIN_LIST = List.of(
                     new Protein(
                             "1",
                             "https://tech.redventures.com.br/icons/pork/inactive.svg",
@@ -21,7 +23,11 @@ public class ProteinDataStore {
                             "A sliced flavourful pork meat with a selection of season vegetables.",
                             10)
             );
-    };
+    }
+
+    /*************
+     * METHODS
+     **********/
 
     public static String getNameById(String id){
 

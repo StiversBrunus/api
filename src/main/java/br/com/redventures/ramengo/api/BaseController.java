@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class BaseController {
-
     public void auth (OrderRequestForm form) throws ValidationException {
         try {
             form.validate();

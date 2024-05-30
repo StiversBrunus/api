@@ -20,7 +20,7 @@ public class OrderRequestController extends BaseController {
     public ResponseEntity<OrderRequest> open (@RequestHeader(name = "x-api-key") String tokenAuthentication, @RequestBody OrderRequestForm orderRequestForm) throws ValidationException, IOException, InterruptedException {
 
         // I use the form information
-        // Injection token of the header on form with another information
+        // Inject into the form the token that comes from the header
         OrderRequestForm form = new OrderRequestForm(tokenAuthentication, orderRequestForm.getBrothId(), orderRequestForm.getProteinId());
         form.setOrder(true);
 
