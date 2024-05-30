@@ -19,12 +19,12 @@ public class OrderRequestController extends BaseController {
     @PostMapping
     public ResponseEntity<OrderRequest> open (@RequestHeader(name = "x-api-key") String tokenAuthentication, @RequestBody OrderRequestForm orderRequestForm) throws ValidationException, IOException, InterruptedException {
 
+        System.out.println("Como essa informação chega aqui >>> " + orderRequestForm);
+
         // I use the form information
         // Inject into the form the token that comes from the header together with order parameters
-        OrderRequestForm form = new OrderRequestForm(tokenAuthentication, orderRequestForm.getBrothId(), orderRequestForm.getProteinId());
-
         // Say that this orderRequest isn't just authentication, but an order too.
-        form.setOrder(true);
+        OrderRequestForm form = new OrderRequestForm(orderRequestForm.getBrothId(), orderRequestForm.getProteinId(), true, tokenAuthentication, null);
 
         // Call BaseController for do request authentication
         BaseController baseController = new BaseController();

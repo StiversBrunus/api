@@ -4,31 +4,28 @@ import br.com.redventures.ramengo.api.infra.Security;
 import br.com.redventures.ramengo.api.validation.ValidationException;
 import io.micrometer.common.util.StringUtils;
 
-public class OrderRequestForm {
+import java.util.List;
+
+public class OrderRequestForm extends  OrderRequestItemForm{
 
     /*************
      * FIELDS
      *********/
 
     String token;
-    String brothId;
-    String proteinId;
-    private boolean isOrder = false;
+
+    private List<OrderRequestItemForm> orderList;
 
     /***************
      * BUILDERS
      ***********/
 
     // This constructor is being used for auth get method
-    public OrderRequestForm (String token){
-        this.token = token;
-    }
-
     // This constructor is being used for auth and build order of the post method
-    public OrderRequestForm(String token, String brothId, String proteinId) {
+    public OrderRequestForm(String brothId, String proteinId, boolean isOrder, String token, List<OrderRequestItemForm> orderList) {
+        super(brothId, proteinId, isOrder);
         this.token = token;
-        this.brothId = brothId;
-        this.proteinId = proteinId;
+        this.orderList = orderList;
     }
 
     /*************
@@ -46,10 +43,6 @@ public class OrderRequestForm {
             throw new ValidationException("x-api-key header invalid");
         }
 
-        // if order request be an order, so validate required fields
-        if (this.isOrder() && (StringUtils.isBlank(this.getBrothId()) || StringUtils.isBlank(this.getProteinId()))) {
-            throw new ValidationException("both brothId and proteinId are required");
-        }
     }
 
     /*******************
@@ -64,27 +57,11 @@ public class OrderRequestForm {
         this.token = token;
     }
 
-    public String getBrothId() {
-        return brothId;
-    }
-
-    public void setBrothId(String brothId) {
-        this.brothId = brothId;
-    }
-
-    public String getProteinId() {
-        return proteinId;
-    }
-
-    public void setProteinId(String proteinId) {
-        this.proteinId = proteinId;
-    }
-
-    public boolean isOrder() {
-        return isOrder;
-    }
-
-    public void setOrder(boolean order) {
-        isOrder = order;
+    @Override
+    public String toString() {
+        return "OrderRequestForm{" +
+                "token='" + token + '\'' +
+                ", orderList=" + orderList +
+                '}';
     }
 }

@@ -18,7 +18,7 @@ public class BrothController extends BaseController {
     public List<Broth> open (@RequestHeader(name = "x-api-key") String tokenAuthentication) throws ValidationException {
 
         // Create a new form and pass the header token as a constructor parameter
-        OrderRequestForm form = new OrderRequestForm(tokenAuthentication);
+        OrderRequestForm form = new OrderRequestForm(null, null, false, tokenAuthentication, null);
 
         // Call BaseController for do request authentication
         BaseController baseController = new BaseController();
