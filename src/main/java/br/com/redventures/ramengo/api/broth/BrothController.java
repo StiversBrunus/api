@@ -22,12 +22,6 @@ public class BrothController extends BaseController {
         BaseController baseController = new BaseController();
         baseController.auth(form);
 
-        return this.listBroths();
-    }
-
-    @GetMapping("/list")
-    public List<Broth> listBroths () {
-
         return brothApplicationService.getAllBroth();
     }
 }

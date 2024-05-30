@@ -23,12 +23,6 @@ public class ProteinController extends BaseController {
         BaseController baseController = new BaseController();
         baseController.auth(form);
 
-        return this.getProteins();
-    }
-
-    @GetMapping("/list")
-    public List<Protein> getProteins () {
-
         return proteinApplicationService.getAllProtein();
     }
 }
